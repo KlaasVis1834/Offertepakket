@@ -1,0 +1,533 @@
+/* Algemene opmaak */
+html, body {
+    height: 100%;
+    margin: 0;
+    padding: 0;
+}
+
+.page-container {
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+}
+
+body {
+    font-family: 'Roboto', sans-serif;
+    background-color: #f4f7fa;
+    color: #333;
+}
+
+/* Header */
+header {
+    background: linear-gradient(135deg, #007bff, #00c4ff);
+    padding: 20px;
+    text-align: center;
+    color: white;
+}
+
+.header-container {
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+.header-logo {
+    max-width: 150px;
+    height: auto;
+}
+
+header h1 {
+    margin: 10px 0;
+    font-size: 2.5em;
+}
+
+header p {
+    margin: 0;
+    font-size: 1.2em;
+}
+
+/* Main content */
+main {
+    flex: 1;
+    padding: 40px 20px;
+}
+
+.form-wrapper {
+    max-width: 800px;
+    margin: 0 auto;
+    background: white;
+    border-radius: 10px;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+    padding: 30px;
+}
+
+.quote-form {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.form-step {
+    display: none;
+}
+
+.form-step.active {
+    display: block;
+}
+
+.form-step h2 {
+    color: #007bff;
+    font-size: 1.8em;
+    margin-bottom: 15px;
+}
+
+.form-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 20px;
+}
+
+.form-field {
+    display: flex;
+    flex-direction: column;
+}
+
+.form-field label {
+    font-weight: bold;
+    margin-bottom: 5px;
+}
+
+.form-field input,
+.form-field textarea,
+.form-field select {
+    padding: 10px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    font-size: 1em;
+}
+
+.form-field textarea {
+    resize: vertical;
+}
+
+/* Toggle buttons */
+.toggle-group {
+    display: flex;
+    gap: 10px;
+    justify-content: center;
+}
+
+.toggle-btn {
+    padding: 12px 30px;
+    background-color: #f0f0f0;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+    font-size: 1.1em;
+}
+
+.toggle-group input[type="radio"]:checked + .toggle-btn {
+    background-color: #007bff;
+    color: white;
+}
+
+.toggle-group input[type="radio"] {
+    display: none;
+}
+
+/* Verzekeringsopties */
+.insurance-options {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 20px;
+}
+
+.category {
+    padding: 15px;
+    background: #f9f9f9;
+    border-radius: 5px;
+}
+
+.category h3 {
+    margin: 0 0 10px;
+    color: #0056b3;
+}
+
+.insurance-item {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    position: relative;
+    padding-left: 40px;
+}
+
+.insurance-item input[type="checkbox"] {
+    margin: 0;
+}
+
+.insurance-item label {
+    flex-grow: 1;
+}
+
+.insurance-item::before {
+    content: '';
+    position: absolute;
+    left: 0;
+    width: 24px;
+    height: 24px;
+    background-size: contain;
+    opacity: 0;
+    transition: opacity 0.3s ease-in-out;
+}
+
+.insurance-item input[type="checkbox"]:checked + label::before {
+    opacity: 1;
+}
+
+/* Symbolen per verzekering */
+#doorlopende-reis::before { background-image: url('icons/suitcase.png'); }
+#caravan::before, #stacaravan::before { background-image: url('icons/caravan.png'); }
+#camper::before { background-image: url('icons/camper.png'); }
+#recreatiewoning::before, #inboedel::before, #inventaris::before { background-image: url('icons/house.png'); }
+#boot::before { background-image: url('icons/boat.png'); }
+#ongevallen-particulier::before, #ongevallen-zakelijk::before { background-image: url('icons/bandage.png'); }
+#verkeersdeelnemers::before, #verkeersschade::before { background-image: url('icons/traffic.png'); }
+#auto-particulier::before, #auto-zakelijk::before, #bestelauto-particulier::before, #bestelauto-zakelijk::before, #vrachtauto::before { background-image: url('icons/car.png'); }
+#motor::before, #motor-zakelijk::before { background-image: url('icons/motorcycle.png'); }
+#bromfiets::before, #bromfiets-zakelijk::before { background-image: url('icons/scooter.png'); }
+#oldtimer::before, #oldtimer-zakelijk::before { background-image: url('icons/classic-car.png'); }
+#aanhangwagen::before { background-image: url('icons/trailer.png'); }
+#hobbytractor::before, #landmateriaal::before { background-image: url('icons/tractor.png'); }
+#quad::before { background-image: url('icons/quad.png'); }
+#fiets::before { background-image: url('icons/bike.png'); }
+#opstal::before, #gebouwen::before { background-image: url('icons/building.png'); }
+#aansprakelijkheid-particulier::before, #aansprakelijkheid-zakelijk::before, #vervoerdersaansprakelijkheid::before { background-image: url('icons/shield.png'); }
+#rechtsbijstand-particulier::before, #rechtsbijstand-zakelijk::before { background-image: url('icons/justice.png'); }
+#aov::before, #inkomen::before { background-image: url('icons/employee.png'); }
+#bouw-montage::before { background-image: url('icons/construction.png'); }
+#bedrijfsschade::before { background-image: url('icons/loss.png'); }
+#eigen-vervoer::before, #goederentransport::before { background-image: url('icons/truck.png'); }
+#milieuschade::before { background-image: url('icons/environment.png'); }
+
+.info-icon {
+    cursor: pointer;
+    color: #007bff;
+    font-size: 14px;
+    position: relative;
+}
+
+.info-icon:hover::after {
+    content: attr(data-tooltip);
+    position: absolute;
+    bottom: 100%;
+    left: 50%;
+    transform: translateX(-50%);
+    background-color: #333;
+    color: white;
+    padding: 5px 10px;
+    border-radius: 5px;
+    font-size: 12px;
+    white-space: nowrap;
+    z-index: 10;
+}
+
+/* Pakketkorting animatie */
+.package-animation {
+    text-align: center;
+    margin-top: 20px;
+}
+
+.discount-bar {
+    display: flex;
+    justify-content: space-between;
+    background: #ddd;
+    border-radius: 20px;
+    padding: 5px;
+    max-width: 400px;
+    margin: 10px auto;
+}
+
+.discount-level {
+    padding: 5px 10px;
+    border-radius: 15px;
+    transition: background-color 0.3s, color 0.3s;
+}
+
+.discount-level.active {
+    background-color: #007bff;
+    color: white;
+}
+
+/* Details Section (Accordion) */
+.details-sections {
+    margin-top: 20px;
+}
+
+.details-section {
+    margin-bottom: 10px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+}
+
+.details-section summary {
+    padding: 10px;
+    background-color: #f0f0f0;
+    cursor: pointer;
+    font-weight: bold;
+    color: #007bff;
+}
+
+.details-section summary:hover {
+    background-color: #e0e0e0;
+}
+
+.details-content {
+    padding: 15px;
+    background-color: #fff;
+}
+
+.details-content h3 {
+    margin: 0 0 10px;
+    color: #0056b3;
+}
+
+.toggle-option {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 10px;
+}
+
+.toggle-option label:first-child {
+    flex-grow: 1;
+}
+
+.amount-field {
+    margin-left: 10px;
+    width: 100px;
+}
+
+.note {
+    font-size: 0.9em;
+    color: #666;
+    margin: 10px 0;
+}
+
+/* Toggle Switch */
+.switch {
+    position: relative;
+    display: inline-block;
+    width: 50px;
+    height: 24px;
+}
+
+.switch input {
+    opacity: 0;
+    width: 0;
+    height: 0;
+}
+
+.slider {
+    position: absolute;
+    cursor: pointer;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: #ccc;
+    transition: 0.4s;
+    border-radius: 24px;
+}
+
+.slider:before {
+    position: absolute;
+    content: "";
+    height: 18px;
+    width: 18px;
+    left: 3px;
+    bottom: 3px;
+    background-color: white;
+    transition: 0.4s;
+    border-radius: 50%;
+}
+
+input:checked + .slider {
+    background-color: #28a745;
+}
+
+input:checked + .slider:before {
+    transform: translateX(26px);
+}
+
+/* Formulieracties */
+.form-actions {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 20px;
+}
+
+.prev-btn, .next-btn, .submit-btn {
+    padding: 12px 30px;
+    border: none;
+    border-radius: 5px;
+    font-size: 1.2em;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+.prev-btn {
+    background-color: #6c757d;
+    color: white;
+}
+
+.next-btn, .submit-btn {
+    background-color: #007bff;
+    color: white;
+}
+
+.prev-btn:hover {
+    background-color: #5a6268;
+}
+
+.next-btn:hover, .submit-btn:hover {
+    background-color: #0056b3;
+}
+
+/* Footer */
+footer {
+    background-color: #003087;
+    color: white;
+    text-align: center;
+    padding: 20px;
+    width: 100%;
+    flex-shrink: 0;
+}
+
+footer p {
+    margin: 0;
+    font-size: 0.9em;
+}
+
+/* Loading Screen */
+.loading-screen {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(255, 255, 255, 0.9);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    z-index: 9999;
+}
+
+.loader {
+    border: 8px solid #f3f3f3;
+    border-top: 8px solid #007bff;
+    border-radius: 50%;
+    width: 60px;
+    height: 60px;
+    animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+}
+
+.loading-screen p {
+    margin-top: 20px;
+    font-size: 1.2em;
+    color: #333;
+}
+
+/* Modal */
+.modal {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.5);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 1000;
+}
+
+.modal-content {
+    background: white;
+    padding: 20px;
+    border-radius: 10px;
+    max-width: 500px;
+    text-align: center;
+}
+
+.modal-content button {
+    margin-top: 20px;
+    padding: 10px 20px;
+    background-color: #007bff;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.modal-content button:hover {
+    background-color: #0056b3;
+}
+
+/* Responsive */
+@media (max-width: 600px) {
+    .form-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .toggle-group {
+        flex-direction: column;
+        gap: 10px;
+    }
+
+    .toggle-btn {
+        width: 100%;
+        text-align: center;
+    }
+
+    .insurance-options {
+        grid-template-columns: 1fr;
+    }
+
+    .form-actions {
+        flex-direction: column;
+        gap: 10px;
+    }
+
+    .prev-btn, .next-btn, .submit-btn {
+        width: 100%;
+    }
+
+    header h1 {
+        font-size: 2em;
+    }
+
+    header p {
+        font-size: 1em;
+    }
+
+    .toggle-option {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+
+    .amount-field {
+        margin-left: 0;
+        margin-top: 5px;
+        width: 100%;
+    }
+}
+
+.hidden {
+    display: none;
+}

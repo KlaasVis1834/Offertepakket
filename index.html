@@ -1,0 +1,920 @@
+<!DOCTYPE html>
+<html lang="nl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Offerteformulier - Klaas Vis Assurantiekantoor</title>
+    <link rel="icon" src="Logo.png" alt="Logo">
+    <link rel="stylesheet" href="styles.css?v=1">
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/@emailjs/browser@3/dist/email.min.js"></script>
+    <script type="text/javascript">
+        (function() {
+            emailjs.init("noRYJWEETvdqfI2sL"); // Jouw Public Key
+        })();
+    </script>
+</head>
+<body>
+    <div class="page-container">
+        <header>
+            <div class="header-container">
+                <img src="Logo.png" alt="Klaas Vis Assurantiekantoor" class="header-logo">
+                <h1>Offerte Aanvragen</h1>
+                <p>Kies uw verzekeringen en ontvang een offerte op maat</p>
+            </div>
+        </header>
+
+        <main>
+            <div class="form-wrapper">
+                <form id="quote-form" class="quote-form">
+                    <!-- Stap 1: Offertesoort -->
+                    <section class="form-step active" id="step-aanschaf">
+                        <h2>Kies uw offertesoort</h2>
+                        <div class="toggle-group">
+                            <input type="radio" id="particulier" name="aanschaf" value="particulier" checked>
+                            <label for="particulier" class="toggle-btn">Particulier</label>
+                            <input type="radio" id="zakelijk" name="aanschaf" value="zakelijk">
+                            <label for="zakelijk" class="toggle-btn">Zakelijk</label>
+                        </div>
+                        <div class="form-actions">
+                            <button type="button" class="next-btn" onclick="nextStep('step-aanschaf', 'step-verzekeringen')">Volgende</button>
+                        </div>
+                    </section>
+
+                    <!-- Stap 2: Verzekeringskeuze -->
+                    <section class="form-step" id="step-verzekeringen">
+                        <h2>Gewenste Verzekeringen</h2>
+                        <p>Selecteer de verzekeringen waarvoor u een offerte wilt:</p>
+                        <div id="verzekeringen-particulier" class="insurance-options hidden">
+                            <div class="category">
+                                <h3>Reizen en Recreatie</h3>
+                                <div class="insurance-item">
+                                    <input type="checkbox" id="doorlopende-reis" name="verzekeringen" value="Doorlopende Reisverzekering">
+                                    <label for="doorlopende-reis">Doorlopende Reisverzekering</label>
+                                    <span class="info-icon" data-tooltip="Dekking voor al uw reizen">ℹ️</span>
+                                </div>
+                                <div class="insurance-item">
+                                    <input type="checkbox" id="caravan" name="verzekeringen" value="Caravan / Vouwwagen">
+                                    <label for="caravan">Caravan / Vouwwagen</label>
+                                    <span class="info-icon" data-tooltip="Voor caravans en vouwwagens">ℹ️</span>
+                                </div>
+                                <div class="insurance-item">
+                                    <input type="checkbox" id="stacaravan" name="verzekeringen" value="Stacaravan">
+                                    <label for="stacaravan">Stacaravan</label>
+                                    <span class="info-icon" data-tooltip="Voor stacaravans">ℹ️</span>
+                                </div>
+                                <div class="insurance-item">
+                                    <input type="checkbox" id="camper" name="verzekeringen" value="Camper">
+                                    <label for="camper">Camper</label>
+                                    <span class="info-icon" data-tooltip="Voor campers">ℹ️</span>
+                                </div>
+                                <div class="insurance-item">
+                                    <input type="checkbox" id="recreatiewoning" name="verzekeringen" value="Recreatiewoning">
+                                    <label for="recreatiewoning">Recreatiewoning</label>
+                                    <span class="info-icon" data-tooltip="Voor vakantiehuizen">ℹ️</span>
+                                </div>
+                                <div class="insurance-item">
+                                    <input type="checkbox" id="boot" name="verzekeringen" value="Bootverzekering">
+                                    <label for="boot">Bootverzekering</label>
+                                    <span class="info-icon" data-tooltip="Voor pleziervaartuigen">ℹ️</span>
+                                </div>
+                            </div>
+                            <div class="category">
+                                <h3>Leven en Welzijn</h3>
+                                <div class="insurance-item">
+                                    <input type="checkbox" id="ongevallen-particulier" name="verzekeringen" value="Ongevallenverzekering">
+                                    <label for="ongevallen-particulier">Ongevallenverzekering</label>
+                                    <span class="info-icon" data-tooltip="Dekking bij ongevallen">ℹ️</span>
+                                </div>
+                                <div class="insurance-item">
+                                    <input type="checkbox" id="verkeersdeelnemers" name="verzekeringen" value="Verkeersdeelnemersverzekering">
+                                    <label for="verkeersdeelnemers">Verkeersdeelnemersverzekering</label>
+                                    <span class="info-icon" data-tooltip="Voor verkeersongevallen">ℹ️</span>
+                                </div>
+                            </div>
+                            <div class="category">
+                                <h3>Vervoer</h3>
+                                <div class="insurance-item">
+                                    <input type="checkbox" id="auto-particulier" name="verzekeringen" value="Personenautoverzekering">
+                                    <label for="auto-particulier">Personenautoverzekering</label>
+                                    <span class="info-icon" data-tooltip="Voor uw personenauto">ℹ️</span>
+                                </div>
+                                <div class="insurance-item">
+                                    <input type="checkbox" id="motor" name="verzekeringen" value="Motorverzekering">
+                                    <label for="motor">Motorverzekering</label>
+                                    <span class="info-icon" data-tooltip="Voor motorfietsen">ℹ️</span>
+                                </div>
+                                <div class="insurance-item">
+                                    <input type="checkbox" id="bromfiets" name="verzekeringen" value="Bromfietsverzekering">
+                                    <label for="bromfiets">Bromfietsverzekering</label>
+                                    <span class="info-icon" data-tooltip="Voor brom- en snorfietsen">ℹ️</span>
+                                </div>
+                                <div class="insurance-item">
+                                    <input type="checkbox" id="oldtimer" name="verzekeringen" value="Oldtimerverzekering">
+                                    <label for="oldtimer">Oldtimerverzekering</label>
+                                    <span class="info-icon" data-tooltip="Voor klassieke voertuigen">ℹ️</span>
+                                </div>
+                                <div class="insurance-item">
+                                    <input type="checkbox" id="bestelauto-particulier" name="verzekeringen" value="Bestelautoverzekering">
+                                    <label for="bestelauto-particulier">Bestelautoverzekering</label>
+                                    <span class="info-icon" data-tooltip="Voor bestelauto’s">ℹ️</span>
+                                </div>
+                                <div class="insurance-item">
+                                    <input type="checkbox" id="aanhangwagen" name="verzekeringen" value="Aanhangwagenverzekering">
+                                    <label for="aanhangwagen">Aanhangwagenverzekering</label>
+                                    <span class="info-icon" data-tooltip="Voor aanhangwagens">ℹ️</span>
+                                </div>
+                                <div class="insurance-item">
+                                    <input type="checkbox" id="hobbytractor" name="verzekeringen" value="Hobbytractorverzekering">
+                                    <label for="hobbytractor">Hobbytractorverzekering</label>
+                                    <span class="info-icon" data-tooltip="Voor hobbytractors">ℹ️</span>
+                                </div>
+                                <div class="insurance-item">
+                                    <input type="checkbox" id="quad" name="verzekeringen" value="Quad / Trike / MP3">
+                                    <label for="quad">Quad / Trike / MP3</label>
+                                    <span class="info-icon" data-tooltip="Voor quads, trikes en MP3’s">ℹ️</span>
+                                </div>
+                                <div class="insurance-item">
+                                    <input type="checkbox" id="fiets" name="verzekeringen" value="Fietsverzekering">
+                                    <label for="fiets">Fietsverzekering</label>
+                                    <span class="info-icon" data-tooltip="Voor fietsen">ℹ️</span>
+                                </div>
+                            </div>
+                            <div class="category">
+                                <h3>Wonen</h3>
+                                <div class="insurance-item">
+                                    <input type="checkbox" id="inboedel" name="verzekeringen" value="Inboedelverzekering">
+                                    <label for="inboedel">Inboedelverzekering</label>
+                                    <span class="info-icon" data-tooltip="Dekking voor uw persoonlijke bezittingen in huis">ℹ️</span>
+                                </div>
+                                <div class="category">
+                                    <input type="checkbox" id="opstal" name="verzekeringen" value="Woonhuisverzekering">
+                                    <label for="opstal">Woonhuisverzekering</label>
+                                    <span class="info-icon" data-tooltip="Dekking voor uw woning">ℹ️</span>
+                                </div>
+                            </div>
+                            <div class="category">
+                                <h3>Recht</h3>
+                                <div class="insurance-item">
+                                    <input type="checkbox" id="aansprakelijkheid-particulier" name="verzekeringen" value="Aansprakelijkheidsverzekering">
+                                    <label for="aansprakelijkheid-particulier">Aansprakelijkheidsverzekering</label>
+                                    <span class="info-icon" data-tooltip="Dekking voor schade aan anderen">ℹ️</span>
+                                </div>
+                                <div class="insurance-item">
+                                    <input type="checkbox" id="rechtsbijstand-particulier" name="verzekeringen" value="Rechtsbijstandsverzekering">
+                                    <label for="rechtsbijstand-particulier">Rechtsbijstandsverzekering</label>
+                                    <span class="info-icon" data-tooltip="Juridische hulp bij geschillen">ℹ️</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div id="verzekeringen-zakelijk" class="insurance-options hidden">
+                            <!-- Zakelijke verzekeringen blijven ongewijzigd -->
+                            <div class="category">
+                                <h3>Inkomensverzekeringen</h3>
+                                <div class="insurance-item">
+                                    <input type="checkbox" id="aov" name="verzekeringen" value="Arbeidsongeschiktheidsverzekering (AOV)">
+                                    <label for="aov">Arbeidsongeschiktheidsverzekering (AOV)</label>
+                                    <span class="info-icon" data-tooltip="Voor zelfstandigen bij arbeidsongeschiktheid">ℹ️</span>
+                                </div>
+                                <div class="insurance-item">
+                                    <input type="checkbox" id="ongevallen-zakelijk" name="verzekeringen" value="Ongevallenverzekering">
+                                    <label for="ongevallen-zakelijk">Ongevallenverzekering</label>
+                                    <span class="info-icon" data-tooltip="Dekking bij ongevallen voor personeel">ℹ️</span>
+                                </div>
+                                <div class="insurance-item">
+                                    <input type="checkbox" id="inkomen" name="verzekeringen" value="Inkomen Collectief">
+                                    <label for="inkomen">Inkomen Collectief</label>
+                                    <span class="info-icon" data-tooltip="Voor medewerkers bij arbeidsongeschiktheid">ℹ️</span>
+                                </div>
+                            </div>
+                            <div class="category">
+                                <h3>Verzekeringen voor Voertuigen</h3>
+                                <div class="insurance-item">
+                                    <input type="checkbox" id="auto-zakelijk" name="verzekeringen" value="Zakelijke Personenautoverzekering">
+                                    <label for="auto-zakelijk">Zakelijke Personenautoverzekering</label>
+                                    <span class="info-icon" data-tooltip="Voor zakelijke personenauto’s">ℹ️</span>
+                                </div>
+                                <div class="insurance-item">
+                                    <input type="checkbox" id="bestelauto-zakelijk" name="verzekeringen" value="Zakelijke Bestelautoverzekering">
+                                    <label for="bestelauto-zakelijk">Zakelijke Bestelautoverzekering</label>
+                                    <span class="info-icon" data-tooltip="Voor zakelijke bestelauto’s">ℹ️</span>
+                                </div>
+                                <div class="insurance-item">
+                                    <input type="checkbox" id="vrachtauto" name="verzekeringen" value="Vrachtautoverzekering">
+                                    <label for="vrachtauto">Vrachtautoverzekering</label>
+                                    <span class="info-icon" data-tooltip="Voor vrachtauto’s">ℹ️</span>
+                                </div>
+                                <div class="insurance-item">
+                                    <input type="checkbox" id="motor-zakelijk" name="verzekeringen" value="Zakelijke Motorverzekering">
+                                    <label for="motor-zakelijk">Zakelijke Motorverzekering</label>
+                                    <span class="info-icon" data-tooltip="Voor zakelijke motorfietsen">ℹ️</span>
+                                </div>
+                                <div class="insurance-item">
+                                    <input type="checkbox" id="bromfiets-zakelijk" name="verzekeringen" value="Zakelijke Bromfietsverzekering">
+                                    <label for="bromfiets-zakelijk">Zakelijke Bromfietsverzekering</label>
+                                    <span class="info-icon" data-tooltip="Voor zakelijke bromfietsen">ℹ️</span>
+                                </div>
+                                <div class="insurance-item">
+                                    <input type="checkbox" id="oldtimer-zakelijk" name="verzekeringen" value="Zakelijke Oldtimerverzekering">
+                                    <label for="oldtimer-zakelijk">Zakelijke Oldtimerverzekering</label>
+                                    <span class="info-icon" data-tooltip="Voor zakelijke klassieke voertuigen">ℹ️</span>
+                                </div>
+                            </div>
+                            <div class="category">
+                                <h3>Verzekeringen voor Juridische en Financiële Bescherming</h3>
+                                <div class="insurance-item">
+                                    <input type="checkbox" id="bouw-montage" name="verzekeringen" value="Bouw en Montageverzekering">
+                                    <label for="bouw-montage">Bouw en Montageverzekering</label>
+                                    <span class="info-icon" data-tooltip="Voor bouwprojecten">ℹ️</span>
+                                </div>
+                                <div class="insurance-item">
+                                    <input type="checkbox" id="verkeersschade" name="verzekeringen" value="Verkeersschadeverzekering voor Werknemers">
+                                    <label for="verkeersschade">Verkeersschadeverzekering voor Werknemers</label>
+                                    <span class="info-icon" data-tooltip="Voor verkeersschade van personeel">ℹ️</span>
+                                </div>
+                                <div class="insurance-item">
+                                    <input type="checkbox" id="aansprakelijkheid-zakelijk" name="verzekeringen" value="Aansprakelijkheid voor Bedrijven">
+                                    <label for="aansprakelijkheid-zakelijk">Aansprakelijkheid voor Bedrijven</label>
+                                    <span class="info-icon" data-tooltip="Voor bedrijfsschade aan anderen">ℹ️</span>
+                                </div>
+                                <div class="insurance-item">
+                                    <input type="checkbox" id="rechtsbijstand-zakelijk" name="verzekeringen" value="Rechtsbijstand voor Bedrijven en Beroepen">
+                                    <label for="rechtsbijstand-zakelijk">Rechtsbijstand voor Bedrijven en Beroepen</label>
+                                    <span class="info-icon" data-tooltip="Juridische hulp voor uw bedrijf">ℹ️</span>
+                                </div>
+                                <div class="insurance-item">
+                                    <input type="checkbox" id="bedrijfsschade" name="verzekeringen" value="Bedrijfsschadeverzekering">
+                                    <label for="bedrijfsschade">Bedrijfsschadeverzekering</label>
+                                    <span class="info-icon" data-tooltip="Dekking bij bedrijfsonderbreking">ℹ️</span>
+                                </div>
+                            </div>
+                            <div class="category">
+                                <h3>Verzekeringen voor Transport</h3>
+                                <div class="insurance-item">
+                                    <input type="checkbox" id="eigen-vervoer" name="verzekeringen" value="Eigen Vervoerverzekering">
+                                    <label for="eigen-vervoer">Eigen Vervoerverzekering</label>
+                                    <span class="info-icon" data-tooltip="Voor eigen goederenvervoer">ℹ️</span>
+                                </div>
+                                <div class="insurance-item">
+                                    <input type="checkbox" id="landmateriaal" name="verzekeringen" value="Landmateriaalverzekering">
+                                    <label for="landmateriaal">Landmateriaalverzekering</label>
+                                    <span class="info-icon" data-tooltip="Voor landbouwmachines">ℹ️</span>
+                                </div>
+                                <div class="insurance-item">
+                                    <input type="checkbox" id="vervoerdersaansprakelijkheid" name="verzekeringen" value="Vervoerdersaansprakelijkheidsverzekering">
+                                    <label for="vervoerdersaansprakelijkheid">Vervoerdersaansprakelijkheidsverzekering</label>
+                                    <span class="info-icon" data-tooltip="Voor aansprakelijkheid als vervoerder">ℹ️</span>
+                                </div>
+                                <div class="insurance-item">
+                                    <input type="checkbox" id="goederentransport" name="verzekeringen" value="Goederentransportverzekering">
+                                    <label for="goederentransport">Goederentransportverzekering</label>
+                                    <span class="info-icon" data-tooltip="Voor goederen tijdens transport">ℹ️</span>
+                                </div>
+                            </div>
+                            <div class="category">
+                                <h3>Verzekeringen voor Pand en Inventaris</h3>
+                                <div class="insurance-item">
+                                    <input type="checkbox" id="gebouwen" name="verzekeringen" value="Gebouwenverzekering">
+                                    <label for="gebouwen">Gebouwenverzekering</label>
+                                    <span class="info-icon" data-tooltip="Dekking voor uw bedrijfspand">ℹ️</span>
+                                </div>
+                                <div class="insurance-item">
+                                    <input type="checkbox" id="inventaris" name="verzekeringen" value="Inventaris en Goederen">
+                                    <label for="inventaris">Inventaris en Goederen</label>
+                                    <span class="info-icon" data-tooltip="Voor bedrijfsinventaris en goederen">ℹ️</span>
+                                </div>
+                                <div class="insurance-item">
+                                    <input type="checkbox" id="milieuschade" name="verzekeringen" value="Milieuschadeverzekering">
+                                    <label for="milieuschade">Milieuschadeverzekering</label>
+                                    <span class="info-icon" data-tooltip="Voor milieuschade door uw bedrijf">ℹ️</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div id="package-discount" class="package-animation hidden">
+                            <p>Hoe meer verzekeringen, hoe meer korting!</p>
+                            <div class="discount-bar">
+                                <span class="discount-level" data-level="1">1 verzekering</span>
+                                <span class="discount-level" data-level="2">2 verzekeringen</span>
+                                <span class="discount-level" data-level="3">3+ verzekeringen</span>
+                            </div>
+                        </div>
+                        <div class="form-actions">
+                            <button type="button" class="prev-btn" onclick="prevStep('step-verzekeringen', 'step-aanschaf')">Vorige</button>
+                            <button type="button" class="next-btn" onclick="nextStep('step-verzekeringen', 'step-details')">Volgende</button>
+                        </div>
+                    </section>
+
+                    <!-- Stap 3: Aanvullende Vragen -->
+                    <section class="form-step" id="step-details">
+                        <h2>Aanvullende Vragen</h2>
+                        <div id="details-sections" class="details-sections">
+                            <!-- Doorlopende Reisverzekering -->
+                            <details id="details-doorlopende-reis" class="details-section hidden">
+                                <summary>Doorlopende Reisverzekering</summary>
+                                <div class="details-content">
+                                    <h3>Dekkingen</h3>
+                                    <div class="toggle-option">
+                                        <label>Uitbreiding tot 180 dagen</label>
+                                        <label class="switch">
+                                            <input type="checkbox" name="reis-180-dagen">
+                                            <span class="slider"></span>
+                                        </label>
+                                    </div>
+                                    <div class="toggle-option">
+                                        <label>Werelddekking</label>
+                                        <label class="switch">
+                                            <input type="checkbox" name="reis-wereld">
+                                            <span class="slider"></span>
+                                        </label>
+                                    </div>
+                                    <div class="toggle-option">
+                                        <label>Geneeskundige kosten</label>
+                                        <label class="switch">
+                                            <input type="checkbox" name="reis-geneeskundig">
+                                            <span class="slider"></span>
+                                        </label>
+                                    </div>
+                                    <div class="toggle-option">
+                                        <label>Annuleringskosten</label>
+                                        <label class="switch">
+                                            <input type="checkbox" name="reis-annulering">
+                                            <span class="slider"></span>
+                                        </label>
+                                    </div>
+                                    <div class="toggle-option">
+                                        <label>Uitbreiding annuleringskosten</label>
+                                        <label class="switch">
+                                            <input type="checkbox" name="reis-annulering-uitbreiding">
+                                            <span class="slider"></span>
+                                        </label>
+                                    </div>
+                                    <div class="toggle-option">
+                                        <label>Annuleringsgarantie tot €1.500</label>
+                                        <label class="switch">
+                                            <input type="checkbox" name="reis-annulering-1500">
+                                            <span class="slider"></span>
+                                        </label>
+                                    </div>
+                                    <div class="toggle-option">
+                                        <label>Zaakwaarnemer</label>
+                                        <label class="switch">
+                                            <input type="checkbox" name="reis-zaakwaarnemer">
+                                            <span class="slider"></span>
+                                        </label>
+                                    </div>
+                                    <div class="toggle-option">
+                                        <label>Ongevallen</label>
+                                        <label class="switch">
+                                            <input type="checkbox" name="reis-ongevallen">
+                                            <span class="slider"></span>
+                                        </label>
+                                    </div>
+                                    <div class="toggle-option">
+                                        <label>Winter- en onderwatersport</label>
+                                        <label class="switch">
+                                            <input type="checkbox" name="reis-wintersport">
+                                            <span class="slider"></span>
+                                        </label>
+                                    </div>
+                                    <div class="toggle-option">
+                                        <label>Hulpverlening vervoer</label>
+                                        <label class="switch">
+                                            <input type="checkbox" name="reis-hulpverlening">
+                                            <span class="slider"></span>
+                                        </label>
+                                    </div>
+                                    <div class="toggle-option">
+                                        <label>Uitbreiding geld tot €750</label>
+                                        <label class="switch">
+                                            <input type="checkbox" name="reis-geld-750">
+                                            <span class="slider"></span>
+                                        </label>
+                                    </div>
+                                    <div class="toggle-option">
+                                        <label>Zakenreizen</label>
+                                        <label class="switch">
+                                            <input type="checkbox" name="reis-zakenreizen">
+                                            <span class="slider"></span>
+                                        </label>
+                                    </div>
+                                    <div class="toggle-option">
+                                        <label>Uitbreiding sportuitrusting tot €2.000</label>
+                                        <label class="switch">
+                                            <input type="checkbox" name="reis-sportuitrusting-2000">
+                                            <span class="slider"></span>
+                                        </label>
+                                    </div>
+                                    <div class="toggle-option">
+                                        <label>Uitbreiding fiets tot €2.000</label>
+                                        <label class="switch">
+                                            <input type="checkbox" name="reis-fiets-2000">
+                                            <span class="slider"></span>
+                                        </label>
+                                    </div>
+                                </div>
+                            </details>
+
+                            <!-- Caravan/Vouwwagen -->
+                            <details id="details-caravan" class="details-section hidden">
+                                <summary>Caravan / Vouwwagen</summary>
+                                <div class="details-content">
+                                    <div class="form-field">
+                                        <label for="caravan-type">Soort</label>
+                                        <select id="caravan-type" name="caravan-type">
+                                            <option value="caravan">Caravan</option>
+                                            <option value="vouwwagen">Vouwwagen</option>
+                                        </select>
+                                    </div>
+                                    <div class="form-field">
+                                        <label for="caravan-bouwjaar">Bouwjaar</label>
+                                        <input type="number" id="caravan-bouwjaar" name="caravan-bouwjaar" min="1900" max="2025">
+                                    </div>
+                                    <div class="toggle-option">
+                                        <label>Gekentekend</label>
+                                        <label class="switch">
+                                            <input type="checkbox" name="caravan-gekentekend">
+                                            <span class="slider"></span>
+                                        </label>
+                                    </div>
+                                    <h3>Dekkingen</h3>
+                                    <div class="form-field">
+                                        <label for="caravan-cataloguswaarde">Cataloguswaarde (€)</label>
+                                        <input type="number" id="caravan-cataloguswaarde" name="caravan-cataloguswaarde" min="0" step="1">
+                                    </div>
+                                    <p class="note">Let op: De caravan/vouwwagen moet zijn voorzien van een door SCM goedgekeurd disselslot of een door SCM goedgekeurde wielklem als deze onbeheerd is achtergelaten.</p>
+                                    <div class="toggle-option">
+                                        <label>1e eigenaar</label>
+                                        <label class="switch">
+                                            <input type="checkbox" name="caravan-eerste-eigenaar">
+                                            <span class="slider"></span>
+                                        </label>
+                                    </div>
+                                    <div class="toggle-option">
+                                        <label>Uitbreiding aanschafwaarderegeling</label>
+                                        <label class="switch">
+                                            <input type="checkbox" name="caravan-aanschafwaarde">
+                                            <span class="slider"></span>
+                                        </label>
+                                    </div>
+                                    <div class="toggle-option">
+                                        <label>Extra eigen risico</label>
+                                        <label class="switch">
+                                            <input type="checkbox" name="caravan-extra-risico">
+                                            <span class="slider"></span>
+                                        </label>
+                                    </div>
+                                    <div class="toggle-option">
+                                        <label>Accessoires</label>
+                                        <label class="switch">
+                                            <input type="checkbox" name="caravan-accessoires" onchange="toggleAmountField('caravan-accessoires-amount', this.checked)">
+                                            <span class="slider"></span>
+                                        </label>
+                                        <input type="number" id="caravan-accessoires-amount" name="caravan-accessoires-amount" class="amount-field hidden" min="0" step="1" placeholder="Bedrag (€)">
+                                    </div>
+                                    <div class="toggle-option">
+                                        <label>Inboedel</label>
+                                        <label class="switch">
+                                            <input type="checkbox" name="caravan-inboedel" onchange="toggleAmountField('caravan-inboedel-amount', this.checked)">
+                                            <span class="slider"></span>
+                                        </label>
+                                        <input type="number" id="caravan-inboedel-amount" name="caravan-inboedel-amount" class="amount-field hidden" min="0" step="1" placeholder="Bedrag (€)">
+                                    </div>
+                                    <div class="toggle-option">
+                                        <label>Hagel / Neerslag</label>
+                                        <label class="switch">
+                                            <input type="checkbox" name="caravan-hagel">
+                                            <span class="slider"></span>
+                                        </label>
+                                    </div>
+                                    <div class="toggle-option">
+                                        <label>Hagelwerend dak</label>
+                                        <label class="switch">
+                                            <input type="checkbox" name="caravan-hagelwerend">
+                                            <span class="slider"></span>
+                                        </label>
+                                    </div>
+                                </div>
+                            </details>
+
+                            <!-- Stacaravan -->
+                            <details id="details-stacaravan" class="details-section hidden">
+                                <summary>Stacaravan</summary>
+                                <div class="details-content">
+                                    <div class="form-field">
+                                        <label for="stacaravan-bouwjaar">Bouwjaar</label>
+                                        <input type="number" id="stacaravan-bouwjaar" name="stacaravan-bouwjaar" min="1900" max="2025">
+                                    </div>
+                                    <h3>Dekkingen</h3>
+                                    <div class="form-field">
+                                        <label for="stacaravan-herbouwwaarde">Herbouwwaarde (€)</label>
+                                        <input type="number" id="stacaravan-herbouwwaarde" name="stacaravan-herbouwwaarde" min="0" step="1">
+                                    </div>
+                                    <div class="toggle-option">
+                                        <label>Accessoires</label>
+                                        <label class="switch">
+                                            <input type="checkbox" name="stacaravan-accessoires" onchange="toggleAmountField('stacaravan-accessoires-amount', this.checked)">
+                                            <span class="slider"></span>
+                                        </label>
+                                        <input type="number" id="stacaravan-accessoires-amount" name="stacaravan-accessoires-amount" class="amount-field hidden" min="0" step="1" placeholder="Bedrag (€)">
+                                    </div>
+                                    <div class="toggle-option">
+                                        <label>Bijgebouw</label>
+                                        <label class="switch">
+                                            <input type="checkbox" name="stacaravan-bijgebouw" onchange="toggleAmountField('stacaravan-bijgebouw-amount', this.checked)">
+                                            <span class="slider"></span>
+                                        </label>
+                                        <input type="number" id="stacaravan-bijgebouw-amount" name="stacaravan-bijgebouw-amount" class="amount-field hidden" min="0" step="1" placeholder="Bedrag (€)">
+                                    </div>
+                                    <div class="toggle-option">
+                                        <label>Inboedel</label>
+                                        <label class="switch">
+                                            <input type="checkbox" name="stacaravan-inboedel" onchange="toggleAmountField('stacaravan-inboedel-amount', this.checked)">
+                                            <span class="slider"></span>
+                                        </label>
+                                        <input type="number" id="stacaravan-inboedel-amount" name="stacaravan-inboedel-amount" class="amount-field hidden" min="0" step="1" placeholder="Bedrag (€)">
+                                    </div>
+                                    <div class="toggle-option">
+                                        <label>Verhuur</label>
+                                        <label class="switch">
+                                            <input type="checkbox" name="stacaravan-verhuur">
+                                            <span class="slider"></span>
+                                        </label>
+                                    </div>
+                                </div>
+                            </details>
+
+                            <!-- Camper -->
+                            <details id="details-camper" class="details-section hidden">
+                                <summary>Camper</summary>
+                                <div class="details-content">
+                                    <div class="form-field">
+                                        <label for="camper-kenteken">Kenteken</label>
+                                        <input type="text" id="camper-kenteken" name="camper-kenteken" placeholder="Vul kenteken in" onblur="fetchRDWData('camper')">
+                                    </div>
+                                    <div class="form-field">
+                                        <label for="camper-merk">Merk</label>
+                                        <input type="text" id="camper-merk" name="camper-merk" readonly>
+                                    </div>
+                                    <div class="form-field">
+                                        <label for="camper-model">Model</label>
+                                        <input type="text" id="camper-model" name="camper-model" readonly>
+                                    </div>
+                                    <div class="form-field">
+                                        <label for="camper-type">Type</label>
+                                        <input type="text" id="camper-type" name="camper-type">
+                                    </div>
+                                    <div class="form-field">
+                                        <label for="camper-dagwaarde">Indicatie dagwaarde (€)</label>
+                                        <input type="number" id="camper-dagwaarde" name="camper-dagwaarde" min="0" step="1">
+                                    </div>
+                                    <div class="form-field">
+                                        <label for="camper-gewicht">Totaalgewicht (kg)</label>
+                                        <input type="number" id="camper-gewicht" name="camper-gewicht" min="0" step="1">
+                                    </div>
+                                    <div class="form-field">
+                                        <label for="camper-bouwjaar">Bouwjaar</label>
+                                        <input type="number" id="camper-bouwjaar" name="camper-bouwjaar" min="1900" max="2025">
+                                    </div>
+                                    <div class="form-field">
+                                        <label for="camper-schadevrij">Aantal schadevrije jaren</label>
+                                        <input type="number" id="camper-schadevrij" name="camper-schadevrij" min="0" step="1">
+                                    </div>
+                                    <h3>Dekking</h3>
+                                    <div class="toggle-option">
+                                        <label>Ongevallen inzittenden</label>
+                                        <label class="switch">
+                                            <input type="checkbox" name="camper-ongevallen">
+                                            <span class="slider"></span>
+                                        </label>
+                                    </div>
+                                    <div class="toggle-option">
+                                        <label>Schadeverzekering inzittenden</label>
+                                        <label class="switch">
+                                            <input type="checkbox" name="camper-schade-inzittenden">
+                                            <span class="slider"></span>
+                                        </label>
+                                    </div>
+                                    <div class="toggle-option">
+                                        <label>Motorrijtuigenrechtsbijstand</label>
+                                        <label class="switch">
+                                            <input type="checkbox" name="camper-rechtsbijstand">
+                                            <span class="slider"></span>
+                                        </label>
+                                    </div>
+                                    <div class="toggle-option">
+                                        <label>Verhaalsrechtsbijstand</label>
+                                        <label class="switch">
+                                            <input type="checkbox" name="camper-verhaalsrechtsbijstand">
+                                            <span class="slider"></span>
+                                        </label>
+                                    </div>
+                                    <div class="toggle-option">
+                                        <label>Pechhulp</label>
+                                        <label class="switch">
+                                            <input type="checkbox" name="camper-pechhulp">
+                                            <span class="slider"></span>
+                                        </label>
+                                    </div>
+                                    <div class="toggle-option">
+                                        <label>Bonusbeschermer</label>
+                                        <label class="switch">
+                                            <input type="checkbox" name="camper-bonusbeschermer">
+                                            <span class="slider"></span>
+                                        </label>
+                                    </div>
+                                </div>
+                            </details>
+
+                            <!-- Recreatiewoning -->
+                            <details id="details-recreatiewoning" class="details-section hidden">
+                                <summary>Recreatiewoning</summary>
+                                <div class="details-content">
+                                    <h3>Parkgegevens</h3>
+                                    <div class="form-field">
+                                        <label for="recreatiewoning-postcode">Postcode</label>
+                                        <input type="text" id="recreatiewoning-postcode" name="recreatiewoning-postcode" placeholder="Bijv. 1234 AB" onblur="fetchPostcodeDataRecreatie()">
+                                    </div>
+                                    <div class="form-field">
+                                        <label for="recreatiewoning-huisnummer">Huisnummer</label>
+                                        <input type="text" id="recreatiewoning-huisnummer" name="recreatiewoning-huisnummer" onblur="fetchPostcodeDataRecreatie()">
+                                    </div>
+                                    <div class="form-field">
+                                        <label for="recreatiewoning-toevoeging">Toevoeging</label>
+                                        <input type="text" id="recreatiewoning-toevoeging" name="recreatiewoning-toevoeging">
+                                    </div>
+                                    <div class="form-field">
+                                        <label for="recreatiewoning-straat">Straat</label>
+                                        <input type="text" id="recreatiewoning-straat" name="recreatiewoning-straat" readonly>
+                                    </div>
+                                    <div class="form-field">
+                                        <label for="recreatiewoning-plaats">Plaats</label>
+                                        <input type="text" id="recreatiewoning-plaats" name="recreatiewoning-plaats" readonly>
+                                    </div>
+                                    <div class="toggle-option">
+                                        <label>Fundering</label>
+                                        <label class="switch">
+                                            <input type="checkbox" name="recreatiewoning-fundering">
+                                            <span class="slider"></span>
+                                        </label>
+                                    </div>
+                                    <div class="toggle-option">
+                                        <label>Herbouwwaarde</label>
+                                        <label class="switch">
+                                            <input type="checkbox" name="recreatiewoning-herbouwwaarde" onchange="toggleAmountField('recreatiewoning-herbouwwaarde-amount', this.checked)">
+                                            <span class="slider"></span>
+                                        </label>
+                                        <input type="number" id="recreatiewoning-herbouwwaarde-amount" name="recreatiewoning-herbouwwaarde-amount" class="amount-field hidden" min="0" step="1" placeholder="Bedrag (€)">
+                                    </div>
+                                    <div class="toggle-option">
+                                        <label>Bijgebouw</label>
+                                        <label class="switch">
+                                            <input type="checkbox" name="recreatiewoning-bijgebouw" onchange="toggleAmountField('recreatiewoning-bijgebouw-amount', this.checked)">
+                                            <span class="slider"></span>
+                                        </label>
+                                        <input type="number" id="recreatiewoning-bijgebouw-amount" name="recreatiewoning-bijgebouw-amount" class="amount-field hidden" min="0" step="1" placeholder="Bedrag (€)">
+                                    </div>
+                                    <div class="toggle-option">
+                                        <label>Inboedel</label>
+                                        <label class="switch">
+                                            <input type="checkbox" name="recreatiewoning-inboedel" onchange="toggleAmountField('recreatiewoning-inboedel-amount', this.checked)">
+                                            <span class="slider"></span>
+                                        </label>
+                                        <input type="number" id="recreatiewoning-inboedel-amount" name="recreatiewoning-inboedel-amount" class="amount-field hidden" min="0" step="1" placeholder="Bedrag (€)">
+                                    </div>
+                                    <div class="toggle-option">
+                                        <label>Verhuur</label>
+                                        <label class="switch">
+                                            <input type="checkbox" name="recreatiewoning-verhuur">
+                                            <span class="slider"></span>
+                                        </label>
+                                    </div>
+                                </div>
+                            </details>
+
+                            <!-- Boot -->
+                            <details id="details-boot" class="details-section hidden">
+                                <summary>Bootverzekering</summary>
+                                <div class="details-content">
+                                    <div class="form-field">
+                                        <label for="boot-soort">Soort</label>
+                                        <select id="boot-soort" name="boot-soort">
+                                            <option value="sloep">Sloep</option>
+                                            <option value="vlet">Vlet</option>
+                                            <option value="open-motorboot">Open Motorboot</option>
+                                            <option value="kajuitmotorboot">Kajuitmotorboot</option>
+                                            <option value="open-zeilboot">Open Zeilboot</option>
+                                            <option value="kajuitzeilboot">Kajuitzeilboot</option>
+                                            <option value="rubberboot">Rubberboot</option>
+                                        </select>
+                                    </div>
+                                    <div class="form-field">
+                                        <label for="boot-merk-type">Merk & Type</label>
+                                        <input type="text" id="boot-merk-type" name="boot-merk-type">
+                                    </div>
+                                    <div class="form-field">
+                                        <label for="boot-lengte">Lengte (m)</label>
+                                        <input type="number" id="boot-lengte" name="boot-lengte" min="0" step="0.1">
+                                    </div>
+                                    <div class="form-field">
+                                        <label for="boot-bouwjaar">Bouwjaar</label>
+                                        <input type="number" id="boot-bouwjaar" name="boot-bouwjaar" min="1900" max="2025">
+                                    </div>
+                                    <div class="form-field">
+                                        <label for="boot-aanschafwaarde">Aanschafwaarde boot (inclusief motor(en)) (€)</label>
+                                        <input type="number" id="boot-aanschafwaarde" name="boot-aanschafwaarde" min="0" step="1">
+                                    </div>
+                                    <div class="form-field">
+                                        <label for="boot-motor-soort">Soort motor</label>
+                                        <select id="boot-motor-soort" name="boot-motor-soort">
+                                            <option value="binnenboord">Binnenboord</option>
+                                            <option value="buitenboord">Buitenboord</option>
+                                        </select>
+                                    </div>
+                                    <div class="form-field">
+                                        <label for="boot-motor-aantal">Aantal motoren</label>
+                                        <select id="boot-motor-aantal" name="boot-motor-aantal">
+                                            <option value="1">1</option>
+                                            <option value="2">2</option>
+                                        </select>
+                                    </div>
+                                    <div class="form-field">
+                                        <label for="boot-motor-vermogen">Motorvermogen</label>
+                                        <input type="number" id="boot-motor-vermogen" name="boot-motor-vermogen" min="0" step="1">
+                                        <select id="boot-motor-vermogen-eenheid" name="boot-motor-vermogen-eenheid">
+                                            <option value="pk">PK</option>
+                                            <option value="kw">KW</option>
+                                        </select>
+                                    </div>
+                                    <div class="toggle-option">
+                                        <label>Kan de boot sneller dan 20 km/u?</label>
+                                        <label class="switch">
+                                            <input type="checkbox" name="boot-snelheid">
+                                            <span class="slider"></span>
+                                        </label>
+                                    </div>
+                                    <h3>Dekking</h3>
+                                    <div class="form-field">
+                                        <label for="boot-eigen-risico">Eigen risico</label>
+                                        <select id="boot-eigen-risico" name="boot-eigen-risico">
+                                            <option value="0">€ 0</option>
+                                            <option value="150">€ 150</option>
+                                            <option value="275">€ 275</option>
+                                            <option value="400">€ 400</option>
+                                            <option value="650">€ 650</option>
+                                        </select>
+                                    </div>
+                                    <div class="form-field">
+                                        <label for="boot-aanschafdatum">Aanschafdatum</label>
+                                        <input type="date" id="boot-aanschafdatum" name="boot-aanschafdatum">
+                                    </div>
+                                    <div class="toggle-option">
+                                        <label>Ongevallen opvarenden</label>
+                                        <label class="switch">
+                                            <input type="checkbox" name="boot-ongevallen">
+                                            <span class="slider"></span>
+                                        </label>
+                                    </div>
+                                    <div class="toggle-option">
+                                        <label>Rechtsbijstand</label>
+                                        <label class="switch">
+                                            <input type="checkbox" name="boot-rechtsbijstand">
+                                            <span class="slider"></span>
+                                        </label>
+                                    </div>
+                                    <div class="toggle-option">
+                                        <label>Trailer meeverzekeren</label>
+                                        <label class="switch">
+                                            <input type="checkbox" name="boot-trailer">
+                                            <span class="slider"></span>
+                                        </label>
+                                    </div>
+                                </div>
+                            </details>
+                        </div>
+                        <div class="form-actions">
+                            <button type="button" class="prev-btn" onclick="prevStep('step-details', 'step-verzekeringen')">Vorige</button>
+                            <button type="button" class="next-btn" onclick="nextStep('step-details', 'step-gegevens')">Volgende</button>
+                        </div>
+                    </section>
+
+                    <!-- Stap 4: Klantgegevens -->
+                    <section class="form-step" id="step-gegevens">
+                        <h2>Uw Gegevens</h2>
+                        <div id="gegevens-particulier" class="form-grid hidden">
+                            <div class="form-field">
+                                <label for="voorletters">Voorletters *</label>
+                                <input type="text" id="voorletters" name="voorletters" required autocomplete="given-name">
+                            </div>
+                            <div class="form-field">
+                                <label for="achternaam">Achternaam *</label>
+                                <input type="text" id="achternaam" name="achternaam" required autocomplete="family-name">
+                            </div>
+                            <div class="form-field">
+                                <label for="postcode">Postcode *</label>
+                                <input type="text" id="postcode" name="postcode" required placeholder="Bijv. 1234 AB" onblur="fetchPostcodeData()">
+                            </div>
+                            <div class="form-field">
+                                <label for="huisnummer">Huisnummer *</label>
+                                <input type="text" id="huisnummer" name="huisnummer" required onblur="fetchPostcodeData()">
+                            </div>
+                            <div class="form-field">
+                                <label for="straat">Straat</label>
+                                <input type="text" id="straat" name="straat" readonly>
+                            </div>
+                            <div class="form-field">
+                                <label for="plaats">Plaats</label>
+                                <input type="text" id="plaats" name="plaats" readonly>
+                            </div>
+                            <div class="form-field">
+                                <label for="geboortedatum">Geboortedatum *</label>
+                                <input type="date" id="geboortedatum" name="geboortedatum" required autocomplete="bday">
+                            </div>
+                            <div class="form-field">
+                                <label for="gezinssamenstelling">Gezinssamenstelling</label>
+                                <select id="gezinssamenstelling" name="gezinssamenstelling">
+                                    <option value="alleenstaand">Alleenstaand</option>
+                                    <option value="samenwonend">Samenwonend</option>
+                                    <option value="gezin">Gezin met kinderen</option>
+                                </select>
+                            </div>
+                            <div class="form-field">
+                                <label for="email-particulier">E-mailadres *</label>
+                                <input type="email" id="email-particulier" name="email" required autocomplete="email">
+                            </div>
+                            <div class="form-field">
+                                <label for="telefoon-particulier">Telefoonnummer</label>
+                                <input type="tel" id="telefoon-particulier" name="telefoon" autocomplete="tel">
+                            </div>
+                        </div>
+                        <div id="gegevens-zakelijk" class="form-grid hidden">
+                            <div class="form-field">
+                                <label for="bedrijfsnaam">Bedrijfsnaam *</label>
+                                <input type="text" id="bedrijfsnaam" name="bedrijfsnaam" required autocomplete="organization">
+                            </div>
+                            <div class="form-field">
+                                <label for="kvk">KvK-nummer *</label>
+                                <input type="text" id="kvk" name="kvk" required placeholder="Vul KvK-nummer in">
+                            </div>
+                            <div class="form-field">
+                                <label for="postcode-zakelijk">Postcode *</label>
+                                <input type="text" id="postcode-zakelijk" name="postcode-zakelijk" required placeholder="Bijv. 1234 AB" onblur="fetchPostcodeDataZakelijk()">
+                            </div>
+                            <div class="form-field">
+                                <label for="huisnummer-zakelijk">Huisnummer *</label>
+                                <input type="text" id="huisnummer-zakelijk" name="huisnummer-zakelijk" required onblur="fetchPostcodeDataZakelijk()">
+                            </div>
+                            <div class="form-field">
+                                <label for="adres-zakelijk">Adres</label>
+                                <input type="text" id="adres-zakelijk" name="adres-zakelijk" readonly>
+                            </div>
+                            <div class="form-field">
+                                <label for="plaats-zakelijk">Plaats</label>
+                                <input type="text" id="plaats-zakelijk" name="plaats-zakelijk" readonly>
+                            </div>
+                            <div class="form-field">
+                                <label for="contactpersoon">Contactpersoon *</label>
+                                <input type="text" id="contactpersoon" name="contactpersoon" required autocomplete="name">
+                            </div>
+                            <div class="form-field">
+                                <label for="email-zakelijk">E-mailadres *</label>
+                                <input type="email" id="email-zakelijk" name="email" required autocomplete="email">
+                            </div>
+                            <div class="form-field">
+                                <label for="telefoon-zakelijk">Telefoonnummer</label>
+                                <input type="tel" id="telefoon-zakelijk" name="telefoon" autocomplete="tel">
+                            </div>
+                        </div>
+                        <div class="form-field">
+                            <label for="opmerkingen">Opmerkingen</label>
+                            <textarea id="opmerkingen" name="opmerkingen" rows="4" placeholder="Eventuele extra informatie"></textarea>
+                        </div>
+                        <div class="form-actions">
+                            <button type="button" class="prev-btn" onclick="prevStep('step-gegevens', 'step-details')">Vorige</button>
+                            <button type="submit" class="submit-btn">Offerte Aanvragen</button>
+                        </div>
+                    </section>
+                </form>
+            </div>
+        </main>
+
+        <footer>
+            <p>© 2025 BV Assurantiekantoor Klaas Vis Ao. 1834 | Alle rechten voorbehouden</p>
+        </footer>
+    </div>
+
+    <!-- Loading Screen -->
+    <div id="loadingScreen" class="loading-screen" style="display: none;">
+        <div class="loader"></div>
+        <p>Uw offerteaanvraag wordt verwerkt...</p>
+    </div>
+
+    <!-- Resultaat Modal -->
+    <div id="resultModal" class="modal" style="display: none;">
+        <div class="modal-content">
+            <p id="resultText"></p>
+            <button type="button" onclick="closeModal()">Sluiten</button>
+        </div>
+    </div>
+
+    <script src="script.js?v=1"></script>
+</body>
+</html>
