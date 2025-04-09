@@ -485,18 +485,36 @@ footer p {
         grid-template-columns: 1fr;
     }
 
+    .insurance-item {
+        padding-left: 30px; /* Verminder padding voor smallere vakjes */
+        font-size: 0.9em; /* Kleinere tekst voor betere pasvorm */
+    }
+
+    .form-field input,
+    .form-field textarea,
+    .form-field select {
+        padding: 8px; /* Verminder padding voor smallere inputs */
+        font-size: 0.9em;
+    }
+
+    .category {
+        padding: 10px; /* Verminder padding van categorieën */
+    }
+
+    /* Verberg info-symbooltjes op mobiel */
+    .info-icon {
+        display: none;
+    }
+
     .toggle-group {
         flex-direction: column;
-        gap: 10px;
+        gap: 8px; /* Iets kleinere ruimte tussen toggle-knoppen */
     }
 
     .toggle-btn {
         width: 100%;
         text-align: center;
-    }
-
-    .insurance-options {
-        grid-template-columns: 1fr;
+        padding: 10px; /* Verminder padding voor smallere knoppen */
     }
 
     .form-actions {
@@ -506,6 +524,7 @@ footer p {
 
     .prev-btn, .next-btn, .submit-btn {
         width: 100%;
+        padding: 10px; /* Verminder padding voor smallere knoppen */
     }
 
     header h1 {
@@ -525,6 +544,13 @@ footer p {
         margin-left: 0;
         margin-top: 5px;
         width: 100%;
+    }
+}
+
+/* Zorg dat info-symbooltjes op desktop behouden blijven */
+@media (min-width: 601px) {
+    .info-icon {
+        display: inline-block; /* Zichtbaar op desktop */
     }
 }
 
